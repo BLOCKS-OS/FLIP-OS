@@ -1,3 +1,5 @@
+#include "extra.h"
+
 #define PIC1_C 0x20
 #define PIC1_D 0x21
 #define PIC2_C 0xa0
@@ -22,9 +24,10 @@ void getDecAscii(int);
 
 void initIDT();
 
-// extern allows us to jumps to IDT.asm
+// "extern" allows us to jumps to IDT.asm
 extern  void loadIdt();
 extern  void isr1_Handler();
+
 void handleKeypress(int);
 void pressed(char);
 void picRemap();
@@ -32,9 +35,12 @@ void picRemap();
 unsigned char inportb(unsigned short);
 void outportb(unsigned short , unsigned char);
 
-char* TM_START;
 char NumberAscii[10];
 int CELL;
+
+char COMMAND[21];
+int i = 0;
+
 
 struct IDT_ENTRY{
     unsigned short base_Lower;
@@ -70,9 +76,9 @@ int start(){
 	cls();
 	setMonitorColor(0xa5);
 
-	char Welcome[] = "Welcome To OS0 : Copyright 2021\n";
-	char Welcome2[] = "Command Line Version 1.0.0.0\n\n";
-	char OSM[] = "OS0 > ";
+	char Welcome[] = "Welcome To BLOCKS OS : Copyright @2022\n";
+	char Welcome2[] = "Command Line Version 1.0.0.0 developed by Team Blocks\n\n";
+	char OSM[] = "admin > ";
 
 	printString(Welcome);
 	printString(Welcome2);
@@ -238,6 +244,7 @@ extern void isr1_Handler(){
  * representation of the scan code.
 */
 void handleKeypress(int code){
+	char OSM[] = "\nadmin > ";
 	char Scancode[] = {
 		0 , 0 , '1' , '2' ,
 		'3' , '4' , '5' , '6' , 
@@ -251,14 +258,25 @@ void handleKeypress(int code){
 		',' , '.' , '/' , 0 , '*' , 0 , ' '
 	};
 	
-	if(code == 0x1c)
-		printChar('\n');
+	if(code == 0x1c) {
+		COMMAND[i] = '\0';
+		i = 0;
+		strEval(COMMAND);
+		printString(OSM);
+	}
 	else if(code < 0x3a)
 		pressed(Scancode[code]);
 }
 
 void pressed(char key){
-	printChar(key);
+	if(i != 20){
+		COMMAND[i] = key;
+		i++;
+		printChar(key);
+	}
+	else{
+		blink();
+	}
 }
 
 void picRemap(){

@@ -1,2 +1,7 @@
 # FLIP-OS
-Demo OS 
+
+Execute by running **compiler.bat** in windows based system.
+
+> Note: Use cmd
+
+---
