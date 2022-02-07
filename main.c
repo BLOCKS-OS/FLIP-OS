@@ -21,6 +21,8 @@ void printColorChar(char , char);
 void getDecAscii(int);
 
 void initIDT();
+
+// extern allows us to jumps to IDT.asm
 extern  void loadIdt();
 extern  void isr1_Handler();
 void handleKeypress(int);
@@ -42,7 +44,20 @@ struct IDT_ENTRY{
     unsigned short base_Higher;
 };
 
-struct IDT_ENTRY idt[256];
+// * There are a total of
+// * 256 possible idt entries. 
+// * So we created 256 of them with struct
+// * IDT_ENTRY idt[256];
+
+struct IDT_ENTRY idt[256]; // used to define the idt
+
+/* 
+	* Says to the compiler to implement compilation 
+	* so that it knows that there will be a section named
+  * isr1 in an outside source file. We could find this 
+	* section in the IDT.asm file.
+*/
+
 extern unsigned int isr1;
 unsigned int base;
 
@@ -165,6 +180,16 @@ void getDecAscii(int num){
 	NumberAscii[j] = 0;
 }
 
+
+/* 
+* The job of this function is to set the 
+* Interrupt Descriptor Table so that when a
+* key is pressed, It will call the isr1_Handler() 
+* function. 
+*/
+
+
+// Mapped the #1 interrupt(Keyboard interrupt(IRQ 1))
 void initIDT(){
 	idt[1].base_Lower = (base & 0xFFFF);
 	idt[1].base_Higher = (base >> 16) & 0xFFFF;
@@ -180,6 +205,14 @@ void initIDT(){
 	loadIdt();
 }
 
+/*
+* THE inportb AND outportb FUNCTIONS ARE FUNCTIONS THAT HELP US
+* COMMUNICATE WITH EXTERNAL DEVICES. in COMMAND ACCEPTS INPUT
+* FROM EXTERNAL DEVICES AND out COMMAND OUTPUTS COMMANDS AND
+* DATA TO EXTERNAL DEVICES.
+*/
+
+// helps to obtain the first scan code of key being pressed
 unsigned char inportb(unsigned short _port){
     unsigned char rv;
     __asm__ __volatile__ ("inb %1, %0" : "=a" (rv) : "dN" (_port));
@@ -190,12 +223,20 @@ void outportb(unsigned short _port, unsigned char _data){
     __asm__ __volatile__ ("outb %1, %0" : : "dN" (_port), "a" (_data));
 }
 
+/*
+ * When ever a key is pressed, the fuction isr1_Handler() will be called
+ * isr1_Handler mentioned in IDT.asm
+*/
 extern void isr1_Handler(){
 	handleKeypress(inportb(0x60));
 	outportb(0x20 , 0x20);
 	outportb(0xa0 , 0x20);
 }
 
+/*
+ * The arrangement of values in Scancode[] gives us the ascii
+ * representation of the scan code.
+*/
 void handleKeypress(int code){
 	char Scancode[] = {
 		0 , 0 , '1' , '2' ,
