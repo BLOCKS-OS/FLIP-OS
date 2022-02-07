@@ -32,8 +32,10 @@ void strEval(char* CMD){
 	char cmd5[] = "COLORDEF";
 	char cmd6[] = "VID";
 	char cmd7[] = "HI";
+	char cmd8[] = "PLACEMENT_LAGEGI?";
 
-	char msg1[] = "\nHELLO , HAVE A GOOD JOURNEY LEARNING\n";
+	char msg1[] = "\nHELLO , GLAD YOU SELECTED BLOCKS OS\n";
+	char msg2[] = "\...haha, NAHI LAGEGI!. JAO CODEVIT KARO\n";
 
 	if(strcmp(CMD , cmd1))
 		cls();
@@ -52,8 +54,12 @@ void strEval(char* CMD){
 
 	else if(strcmp(CMD , cmd6))
 		vid();
+
 	else if(strcmp(CMD , cmd7))
 		printString(msg1);
+
+	else if(strcmp(CMD , cmd8))
+		printString(msg2);
 }
 
 void vid(){
