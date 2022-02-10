@@ -78,7 +78,7 @@ int start(){
 
 	char Welcome[] = "Welcome To BLOCKS OS : Copyright @2022\n";
 	char Welcome2[] = "Command Line Version 1.0.0.0 developed by Team Blocks\n\n";
-	char OSM[] = "admin > ";
+	char OSM[] = "user@admin > ";
 
 	printString(Welcome);
 	printString(Welcome2);
@@ -244,7 +244,7 @@ extern void isr1_Handler(){
  * representation of the scan code.
 */
 void handleKeypress(int code){
-	char OSM[] = "\nadmin > ";
+	char OSM[] = "\nuser@admin > ";
 	char Scancode[] = {
 		0 , 0 , '1' , '2' ,
 		'3' , '4' , '5' , '6' , 

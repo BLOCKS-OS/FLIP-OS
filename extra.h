@@ -2,6 +2,15 @@ void setMonitorColor(char);
 void cls();
 void printString(char*);
 void vid();
+void put();
+void get();
+
+extern void read();
+extern void write();
+
+
+int blockAddr;
+char At[1024];
 
 char* TM_START;
 
@@ -32,7 +41,9 @@ void strEval(char* CMD){
 	char cmd5[] = "COLORDEF";
 	char cmd6[] = "VID";
 	char cmd7[] = "HI";
-	char cmd8[] = "PLACEMENT_LAGEGI?";
+	char cmd8[] = "PUT";
+	char cmd9[] = "GET";
+	char cmd10[] = "PLACEMENT_LAGEGI?";
 
 	char msg1[] = "\nHELLO , GLAD YOU SELECTED BLOCKS OS\n";
 	char msg2[] = "\...haha, NAHI LAGEGI!. JAO CODEVIT KARO\n";
@@ -58,7 +69,33 @@ void strEval(char* CMD){
 	else if(strcmp(CMD , cmd7))
 		printString(msg1);
 
-	else if(strcmp(CMD , cmd8))
+	else if(strcmp(CMD , cmd8)){
+		blockAddr = 0;
+		int i = 0;
+		
+		while(i < 511){
+			At[i] = 'J'; // Fill with J
+			i++;
+		}
+		At[i] = 0; // Null character
+
+		put(); // Writes to Hard disk
+		
+		i = 0;
+		while(i < 511){
+			At[i] = 0;  // Clears the content
+			i++;
+		}
+	}		
+	
+	else if(strcmp(CMD , cmd9)){
+		blockAddr = 0;
+		get();
+		printString(At);
+	}
+
+	// Additional Functions
+	else if(strcmp(CMD , cmd10))
 		printString(msg2);
 }
 
@@ -72,4 +109,13 @@ void vid(){
 			i++;
 		}
 	}
+}
+
+
+void put() {
+	write();
+}
+
+void get() {
+	read();
 }
