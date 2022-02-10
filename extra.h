@@ -14,16 +14,16 @@ char At[1024];
 
 char* TM_START;
 
-void blink(){
+void blink() {
 	setMonitorColor(0x59);
 	int TIME_OUT = 0x10fffff;
 	while(--TIME_OUT);
 	setMonitorColor(0xa5);
 }
 
-char strcmp(char* sou , char* dest){
+char strcmp(char* sou , char* dest) {
 	int i = 0;
-	while(*(sou + i) == *(dest + i)){
+	while(*(sou + i) == *(dest + i)) {
 		if(*(sou + i) == 0 && *(dest + i) == 0)
 			return 1;
 		i++;
@@ -32,8 +32,8 @@ char strcmp(char* sou , char* dest){
 }
 
 
-// ! evaluates the commands and performs necessary operation.
-void strEval(char* CMD){
+// *evaluates the commands and performs necessary operation.
+void strEval(char* CMD) {
 	char cmd1[] = "CLS";
 	char cmd2[] = "COLORA";
 	char cmd3[] = "COLORB";
@@ -46,7 +46,7 @@ void strEval(char* CMD){
 	char cmd10[] = "PLACEMENT_LAGEGI?";
 
 	char msg1[] = "\nHELLO , GLAD YOU SELECTED BLOCKS OS\n";
-	char msg2[] = "\...haha, NAHI LAGEGI!. JAO CODEVIT KARO\n";
+	char msg2[] = "\n...haha, NAHI LAGEGI!. JAO CODEVIT KARO\n";
 
 	if(strcmp(CMD , cmd1))
 		cls();
@@ -69,26 +69,26 @@ void strEval(char* CMD){
 	else if(strcmp(CMD , cmd7))
 		printString(msg1);
 
-	else if(strcmp(CMD , cmd8)){
+	else if(strcmp(CMD , cmd8)) {
 		blockAddr = 0;
 		int i = 0;
 		
-		while(i < 511){
+		while(i < 511) {
 			At[i] = 'J'; // Fill with J
 			i++;
 		}
 		At[i] = 0; // Null character
 
-		put(); // Writes to Hard disk
+		put(); // Writes to Hard disk by calling write function
 		
 		i = 0;
-		while(i < 511){
+		while(i < 511) {
 			At[i] = 0;  // Clears the content
 			i++;
 		}
 	}		
 	
-	else if(strcmp(CMD , cmd9)){
+	else if(strcmp(CMD , cmd9)) {
 		blockAddr = 0;
 		get();
 		printString(At);
@@ -99,11 +99,11 @@ void strEval(char* CMD){
 		printString(msg2);
 }
 
-void vid(){
+void vid() {
 	char clr = 'A';
-	while(1){
+	while(1) {
 		int i = 0;
-		while(i < 2 * 80 * 25){
+		while(i < 2 * 80 * 25) {
 			*(TM_START + i) = clr;
 			clr++;
 			i++;
