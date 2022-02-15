@@ -38,15 +38,15 @@ void strEval(char* CMD) {
 	char cmd2[] = "COLORA";
 	char cmd3[] = "COLORB";
 	char cmd4[] = "COLORC";
-	char cmd5[] = "COLORDEF";
+	char cmd5[] = "COLORD";
 	char cmd6[] = "VID";
 	char cmd7[] = "HI";
 	char cmd8[] = "PUT";
 	char cmd9[] = "GET";
-	char cmd10[] = "PLACEMENT_LAGEGI?";
+	char cmd10[] = "VITBHOPAL";
 
 	char msg1[] = "\nHELLO , GLAD YOU SELECTED BLOCKS OS\n";
-	char msg2[] = "\n...haha, NAHI LAGEGI!. JAO CODEVIT KARO\n";
+	char msg2[] = "\nA place to learn, an chance to grow.\n";
 
 	if(strcmp(CMD , cmd1))
 		cls();
