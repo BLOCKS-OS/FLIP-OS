@@ -45,8 +45,13 @@ void strEval(char* CMD) {
 	char cmd9[] = "GET";
 	char cmd10[] = "VITBHOPAL";
 
+	char cmd12[] = "TIMER";
+
 	char msg1[] = "\nHELLO , GLAD YOU SELECTED BLOCKS OS\n";
 	char msg2[] = "\nA place to learn, an chance to grow.\n";
+	
+
+	char msg4[] = "\nTIMER STARTED";
 
 	if(strcmp(CMD , cmd1))
 		cls();
@@ -97,6 +102,14 @@ void strEval(char* CMD) {
 	// Additional Functions
 	else if(strcmp(CMD , cmd10))
 		printString(msg2);
+
+
+	// Timer
+	else if(strcmp(CMD , cmd12)){
+
+		printString(msg4);
+		// forSeconds();
+	}
 }
 
 void vid() {
@@ -118,4 +131,13 @@ void put() {
 
 void get() {
 	read();
+}
+
+void forSeconds(){
+	int itime = 10000;
+	int dur = 1;
+	int i, j;
+	for(i=0; i<itime; i++){
+		for(j=0; j<dur; j++);
+	}
 }
