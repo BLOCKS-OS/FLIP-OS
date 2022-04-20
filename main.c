@@ -15,7 +15,8 @@ char* TM_START;
 char NumberAscii[10];
 int CELL;
 
-int start(){
+int start()
+{
 	TM_START = (char*) 0xb8000;
 	int i;
 char obj =0;
@@ -31,7 +32,8 @@ while(1)
 }
 
 
-void cls(){
+void cls()
+{
 	int i = 0;
 	CELL = 0;
 	while(i < (2 * 80 * 25)){
@@ -40,7 +42,8 @@ void cls(){
 	}
 }
 
-void setMonitorColor(char Color){
+void setMonitorColor(char Color)
+{
 	int i = 1;
 	while(i < (2 * 80 * 25)){
 		*(TM_START + i) = Color;
@@ -48,7 +51,8 @@ void setMonitorColor(char Color){
 	}
 }
 
-void printString(char* cA){
+void printString(char* cA)
+{
 	int i = 0;
 	while(*(cA + i) != '\0'){
 		printChar(*(cA + i));
@@ -67,7 +71,8 @@ void printChar(char c){
 	CELL += 2;	
 }
 
-void scroll(){
+void scroll()
+{
 	int i = 160 , y = 0;
 	while(i < 2 * 80 * 25){
 		*(TM_START + y) = *(TM_START + i);
