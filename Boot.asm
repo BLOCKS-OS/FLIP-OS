@@ -11,6 +11,7 @@ mov cl , 0x02   ; Start Reading from Second sector(Sector just after boot sector
 
 int 0x13        ; Bios Interrupt Relating to Disk functions
 
+
 ;Switch To Protected Mode
 cli ; Turns Interrupts off
 lgdt [GDT_DESC] ; Loads Our GDT
