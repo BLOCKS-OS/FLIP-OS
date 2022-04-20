@@ -51,7 +51,7 @@ void strEval(char* CMD) {
 	char msg2[] = "\nA place to learn, an chance to grow.\n";
 	
 
-	char msg4[] = "\nTIMER STARTED";
+	// char msg4[] = "\nTIMER STARTED :: ";
 
 	if(strcmp(CMD , cmd1))
 		cls();
@@ -105,10 +105,30 @@ void strEval(char* CMD) {
 
 
 	// Timer
-	else if(strcmp(CMD , cmd12)){
+	// else if(strcmp(CMD , cmd12)){
+	// 	// printString(msg4);
+	// 	// printString();
+
+	// 	// sleep(1);
+	// }
+
+	else if(CMD[0] == 'S' && CMD[1] == 'L' && CMD[2] == 'E'){
+
+		int num1=0, i, spaces=0;
+
+		for(i=6; i<10 && spaces == 0; i++) {
+			if((CMD[i] >= '0' && CMD[i] <= '9'))
+				num1 = num1*10 + CMD[i] - '0';
+			else if(CMD[i] == ' ') 
+				spaces++;
+		}
+
+		char msg4[] = "\nTIMER STARTED :: FOR ";
+		char msg5[] = num1 + '0';
 
 		printString(msg4);
-		// forSeconds();
+		// printString();
+		// sleep(1);
 	}
 }
 
@@ -133,11 +153,24 @@ void get() {
 	read();
 }
 
-void forSeconds(){
-	int itime = 10000;
-	int dur = 1;
-	int i, j;
+// void forSeconds(){
+// 	int itime = 10000;
+// 	int dur = 1;
+// 	int i, j;
+// 	for(i=0; i<itime; i++){
+// 		for(j=0; j<dur; j++);
+// 	}
+// }
+
+void sleep(int time){
+	// char msg286[] = "";
+
+	int itime = 60000000;
+	int dur = time;
+	int i, j, x;
 	for(i=0; i<itime; i++){
-		for(j=0; j<dur; j++);
+		for(j=0; j<dur; j++){
+			x = j;
+		}
 	}
 }
