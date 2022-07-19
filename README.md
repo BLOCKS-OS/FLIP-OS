@@ -29,11 +29,20 @@ There are several key advantages to such a project over a higher-level project t
 4. Branch-wise development helps students to pick any branch of the complete project and start implementing rest features or any particular feature by using the project as boiler-plate code and documentation for reference. 
 
 
-> ### To be added here....
 
 
+*Execute by running **compiler.bat** in windows based system.*
 
-Execute by running **compiler.bat** in windows based system.
+or using the below commands:
+  ```
+  1. nasm Boot.asm -f bin -o bin\bootsect.bin
+  2. nasm Kernel Entry.asm -f elf -o bin\Entry.bin
+  3. gcc -m32 -ffreestanding -c main.c -o bin\kernel.o
+  4. ld -T NUL -o bin\Kernel.img -Ttext Ox1000 bin\Entry.bin bin\kernel.o
+  5. objcopy -O binary -j .text bin\kernel.img bin\kernel.bin
+  6. copy /b /Y bin\bootsect.bin+bin\kernel.bin bin\os-image
+  7. gemu-system-i386 -drive format=raw, file=bin\os-image
+  ```
 
 > Note: Use cmd
 
